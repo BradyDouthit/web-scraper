@@ -26,7 +26,7 @@ class App extends React.Component {
     //test input to see if it matches valid url regex
     if (url.match(regex)) {
       axios.get("/scrape").then(response => {
-        console.log("test")
+        console.log("abcd")
       })
     } else {
       alert("No match");
