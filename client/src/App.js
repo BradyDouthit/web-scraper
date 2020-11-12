@@ -21,15 +21,21 @@ class App extends React.Component {
 
     let expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
     let regex = new RegExp(expression);
-    let url = this.state.value;
 
     //test input to see if it matches valid url regex
-    if (url.match(regex)) {
-      axios.get("/scrape").then(response => {
-        console.log("abcd")
+    if (this.state.value.match(regex)) {
+      axios.post('/scrape', {
+        url: this.state.value
       })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
     } else {
-      alert("No match");
+      alert("Invalid input");
     }
   }
 
