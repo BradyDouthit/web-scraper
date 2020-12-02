@@ -1,15 +1,39 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
-
 class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { value: '' };
+    this.state = { 
+      value: '',
+      imageData: '',
+      imageURL: ''
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  renderImage = () => {
+    let imageSrc = "";
+    let imageURL = "";
+    axios.post('/scrape', {
+      url: this.state.value
+    })
+      .then((response) => {
+        console.log(response);
+        if (response.data.imageSaved) {
+          imageURL = this.state.value;
+          imageSrc = './img/' + this.state.value + '.png';
+          this.setState({imageData: imageSrc})
+          console.log(imageSrc);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    
   }
 
   handleChange(event) {
@@ -21,19 +45,9 @@ class App extends React.Component {
 
     let expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
     let regex = new RegExp(expression);
-
     //test input to see if it matches valid url regex
     if (this.state.value.match(regex)) {
-      axios.post('/scrape', {
-        url: this.state.value
-      })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
+      this.renderImage()
     } else {
       alert("Invalid input");
     }
@@ -50,6 +64,7 @@ class App extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
+        {this.state.imageData ? <img src={`../img/${this.state.value}.png`}></img> : <div>test</div>}
       </div>
 
     );
