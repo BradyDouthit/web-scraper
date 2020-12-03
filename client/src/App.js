@@ -8,7 +8,6 @@ class App extends React.Component {
     this.state = { 
       value: '',
       imageData: '',
-      imageURL: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,14 +16,13 @@ class App extends React.Component {
 
   renderImage = () => {
     let imageSrc = "";
-    let imageURL = "";
+    
     axios.post('/scrape', {
       url: this.state.value
     })
       .then((response) => {
         console.log(response);
-        if (response.data.imageSaved) {
-          imageURL = this.state.value;
+        if (response.data.imageSaved || response.data.imageExists) {
           imageSrc = './img/' + this.state.value + '.png';
           this.setState({imageData: imageSrc})
           console.log(imageSrc);
@@ -33,7 +31,6 @@ class App extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-    
   }
 
   handleChange(event) {
@@ -64,7 +61,7 @@ class App extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        {this.state.imageData ? <img src={`../img/${this.state.value}.png`}></img> : <div>test</div>}
+        {this.state.imageData ? <img src={`../${this.state.imageData}`}></img> : <div>test</div>}
       </div>
 
     );
