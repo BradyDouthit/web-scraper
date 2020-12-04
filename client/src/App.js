@@ -13,7 +13,19 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
+
+  getHTML = () => {
+    axios.post('/html', {
+      url: this.state.value
+    })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(response => {
+        console.log(response)
+      })
+  }
+
   //get a screenshot of the web page at the url
   getScreenshot = () => {
     let imageSrc = "";
@@ -45,7 +57,8 @@ class App extends React.Component {
     let regex = new RegExp(expression);
     //test input to see if it matches valid url regex
     if (this.state.value.match(regex)) {
-      this.getScreenshot()
+      //this.getScreenshot();
+      this.getHTML();
     } else {
       alert("Invalid input");
     }
