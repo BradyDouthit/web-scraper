@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
+import HTMLRender from './components/HTMLRender';
 class App extends React.Component {
 
   constructor(props) {
@@ -8,6 +9,7 @@ class App extends React.Component {
     this.state = { 
       value: '',
       imageData: '',
+      html: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -20,6 +22,7 @@ class App extends React.Component {
     })
       .then(response => {
         console.log(response)
+        this.setState({ html: response.data })
       })
       .catch(response => {
         console.log(response)
@@ -76,6 +79,7 @@ class App extends React.Component {
           <input type="submit" value="Submit" />
         </form>
         {this.state.imageData ? <img src={`../${this.state.imageData}`}></img> : <div></div>}
+        <HTMLRender html={this.state.html} />
       </div>
 
     );

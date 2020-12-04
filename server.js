@@ -64,10 +64,13 @@ app.post('/html', (req, res) => {
       //ensure that html is handled as a string
       let html = `${response.data}`;
       //replace script tags with div elements to preserve potentially dangerous code, but not execute it
-      let strippedScripts = html.replace(/script/gi, 'div');
-      let strippedImgAndScripts = strippedScripts.replace(/img/gi, 'div');
-      console.log(strippedImgAndScripts);
-      res.send(strippedImgAndScripts);
+      let strippedHTML = html//.replace(/<script>/gmi, '<div>')
+                             //.replace(/<\/script>/gmi, '</div>')
+                             .replace(/img/gmi, 'div')
+                             .replace(/<a/gmi, '<div');
+      //let strippedImgAndScripts = strippedScripts.replace(/img/gi, 'div');
+      console.log(strippedHTML);
+      res.send(strippedHTML);
     })
     .catch(response => {
       console.log(response);

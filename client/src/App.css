@@ -16,3 +16,14 @@
 .App-link {
   color: #61dafb;
 }
+
+#third-party-html {
+  width: 90vw;
+  margin: auto;
+  margin-top: 10vh;
+  height: 60vh;
+}
+
+.third-party-link {
+  color: #0000EE;
+}
