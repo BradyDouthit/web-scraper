@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // create a route to screenshot the requested URL and send it back to the front end
-app.post('/scrape', (req, res) => {
+app.post('/screenshot', (req, res) => {
   let url = req.body.url;
   let imageDir = path.join(__dirname, `client/public/img`)
   let imageName = `${url}.png`
@@ -32,7 +32,7 @@ app.post('/scrape', (req, res) => {
         });
   
         const page = await browser.newPage();
-        await page.goto(`http://${url}`);
+        await page.goto(`https://${url}`);
   
         await page.screenshot(
           { 
@@ -53,3 +53,7 @@ app.post('/scrape', (req, res) => {
     })();
   }
 });
+
+app.post('/html', (req, res) => {
+
+})
