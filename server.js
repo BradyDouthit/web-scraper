@@ -6,8 +6,6 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios').default;
-const cheerio = require('cheerio');
-const replaceAll = require("replaceall");
 //use bodyParser
 app.use(bodyParser.json());
 
@@ -64,11 +62,13 @@ app.post('/html', (req, res) => {
     .then(response => {
       //ensure that html is handled as a string
       let html = `${response.data}`;
-      //replace script tags with div elements to preserve potentially dangerous code, but not execute it
-      let strippedHTML = html.replace(/<\/script>/g, '-->').replace(/<script /g, '<!--');
+
+      //replace script tags containing potentially harmful code with HTML comments, and replacing images with my dog (stored on S3) :-)
+      let strippedHTML = html.replace(/<\/script>/g, '-->')
+      .replace(/<script /g, '<!--')
+      .replace(/<img.*?src="(.*?)"[^\>]+>/g, '<img style="width: 225px; height: 200px" src="https://wbd-web-scraper.s3.amazonaws.com/Serana.jpg">');
       if (strippedHTML.includes('<script>')) {
         strippedHTML = strippedHTML.replace(/<script>/g, '<!--');
-        console.log('STRING INCLUDES <script>')
       }
       console.log(strippedHTML);
       res.send(strippedHTML);
