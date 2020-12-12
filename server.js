@@ -7,6 +7,7 @@ const path = require('path');
 const fs = require('fs');
 const axios = require('axios').default;
 const cheerio = require('cheerio');
+const replaceAll = require("replaceall");
 //use bodyParser
 app.use(bodyParser.json());
 
@@ -64,11 +65,11 @@ app.post('/html', (req, res) => {
       //ensure that html is handled as a string
       let html = `${response.data}`;
       //replace script tags with div elements to preserve potentially dangerous code, but not execute it
-      let strippedHTML = html//.replace(/<script>/gmi, '<div>')
-                             //.replace(/<\/script>/gmi, '</div>')
-                             .replace(/img/gmi, 'div')
-                             .replace(/<a/gmi, '<div');
-      //let strippedImgAndScripts = strippedScripts.replace(/img/gi, 'div');
+      let strippedHTML = html.replace(/<\/script>/g, '-->').replace(/<script /g, '<!--');
+      if (strippedHTML.includes('<script>')) {
+        strippedHTML = strippedHTML.replace(/<script>/g, '<!--');
+        console.log('STRING INCLUDES <script>')
+      }
       console.log(strippedHTML);
       res.send(strippedHTML);
     })
