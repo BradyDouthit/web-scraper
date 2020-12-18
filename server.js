@@ -66,7 +66,8 @@ app.post('/html', (req, res) => {
       //replace script tags containing potentially harmful code with HTML comments, and replacing images with my dog (stored on S3) :-)
       let strippedHTML = html.replace(/<\/script>/g, '-->')
       .replace(/<script /g, '<!--')
-      .replace(/<img.*?src="(.*?)"[^\>]+>/g, '<img style="width: 225px; height: 200px" src="https://wbd-web-scraper.s3.amazonaws.com/Serana.jpg">');
+      .replace(/<img.*?src="(.*?)"[^\>]+>/g, '<img style="width: 225px; height: 200px" src="https://wbd-web-scraper.s3.amazonaws.com/Serana.jpg">')
+      .replace(/href="(.*?)"/g, '');
       if (strippedHTML.includes('<script>')) {
         strippedHTML = strippedHTML.replace(/<script>/g, '<!--');
       }

@@ -20,10 +20,19 @@
 #third-party-html {
   width: 90vw;
   margin: auto;
-  margin-top: 10vh;
+  margin-top: 3vh;
   height: 60vh;
 }
 
 .third-party-link {
   color: #0000EE;
+}
+
+.search-form {
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.search-form p {
+  margin-bottom: 3vh;
 }

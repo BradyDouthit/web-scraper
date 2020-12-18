@@ -56,7 +56,7 @@ class App extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    let expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+    let expression = /[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi;
     let regex = new RegExp(expression);
     //test input to see if it matches valid url regex
     if (this.state.value.match(regex)) {
@@ -71,14 +71,15 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Web Scraper!</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form className="search-form" onSubmit={this.handleSubmit}>
           <label>
             Enter a URL to be scraped:
+            <p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>
           <input type="text" value={this.state.value} onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
         </form>
-        {this.state.imageData ? <img src={`../${this.state.imageData}`}></img> : <div></div>}
+        {this.state.imageData ? <img alt="Website Screenshot" src={`../${this.state.imageData}`}></img> : <div></div>}
         <HTMLRender html={this.state.html} />
       </div>
 
