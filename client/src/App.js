@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import HTMLRender from './components/HTMLRender';
+import LoadingSign from './components/LoadingSign';
+
 class App extends React.Component {
 
   constructor(props) {
@@ -9,7 +11,9 @@ class App extends React.Component {
     this.state = { 
       value: '',
       imageData: '',
-      html: ''
+      html: '',
+      finalURL: '',
+      loading: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,15 +21,21 @@ class App extends React.Component {
   }
 
   getHTML = () => {
+    this.setState({ loading: true });
     axios.post('/html', {
       url: this.state.value
     })
       .then(response => {
         console.log(response)
-        this.setState({ html: response.data })
+        this.setState({ 
+          html: response.data,
+          finalURL: this.state.value,
+          loading: false
+        })
       })
       .catch(response => {
         console.log(response)
+        this.setState({ loading: false })
       })
   }
 
@@ -78,9 +88,10 @@ class App extends React.Component {
           <input type="text" value={this.state.value} onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
+          {this.state.loading ? <LoadingSign loading={true} /> : <LoadingSign loading={false} />}
         </form>
         {this.state.imageData ? <img alt="Website Screenshot" src={`../${this.state.imageData}`}></img> : <div></div>}
-        <HTMLRender html={this.state.html} />
+        <HTMLRender url={this.state.finalURL} html={this.state.html} />
       </div>
 
     );

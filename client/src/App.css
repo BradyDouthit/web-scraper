@@ -20,7 +20,6 @@
 #third-party-html {
   width: 90vw;
   margin: auto;
-  margin-top: 3vh;
   height: 60vh;
 }
 
@@ -34,5 +33,17 @@
 }
 
 .search-form p {
-  margin-bottom: 3vh;
+  margin-block-start: 0px !important;
+}
+
+.loading-container {
+  width: 20vh;
+  margin: 0 auto;
+  margin-top: 2vh;
+}
+
+.loading-rect {
+  background-color: black;
+  width: 10px;
+  height: 10px;
 }
