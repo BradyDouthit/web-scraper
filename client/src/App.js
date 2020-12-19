@@ -22,6 +22,7 @@ class App extends React.Component {
 
   getHTML = () => {
     this.setState({ loading: true });
+
     axios.post('/html', {
       url: this.state.value
     })
@@ -83,8 +84,8 @@ class App extends React.Component {
         <h1>Web Scraper!</h1>
         <form className="search-form" onSubmit={this.handleSubmit}>
           <label>
-            Enter a URL to be scraped:
             <p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>
+            Enter a URL to be scraped:
           <input type="text" value={this.state.value} onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
