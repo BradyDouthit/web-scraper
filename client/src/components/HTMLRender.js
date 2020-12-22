@@ -3,7 +3,7 @@ import React from 'react';
 function HTMLRender (props) {
     return (
         <div id="third-party-div">
-            <p>The site you queried: <a href={props.url}>{props.url}</a></p>
+            {props.url ? <p>The site you queried: <a href={props.url}>{props.url}</a></p> : <div></div>}
             <iframe
                 id="third-party-html"
                 name="third-party-html"

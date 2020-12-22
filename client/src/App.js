@@ -8,7 +8,7 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       value: '',
       imageData: '',
       html: '',
@@ -28,7 +28,7 @@ class App extends React.Component {
     })
       .then(response => {
         console.log(response)
-        this.setState({ 
+        this.setState({
           html: response.data,
           finalURL: this.state.value,
           loading: false
@@ -43,7 +43,7 @@ class App extends React.Component {
   //get a screenshot of the web page at the url
   getScreenshot = () => {
     let imageSrc = "";
-    
+
     axios.post('/screenshot', {
       url: this.state.value
     })
@@ -51,7 +51,7 @@ class App extends React.Component {
         console.log(response);
         if (response.data.imageSaved || response.data.imageExists) {
           imageSrc = './img/' + this.state.value + '.png';
-          this.setState({imageData: imageSrc})
+          this.setState({ imageData: imageSrc })
           console.log(imageSrc);
         }
       })
@@ -81,18 +81,21 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>Web Scraper!</h1>
-        <form className="search-form" onSubmit={this.handleSubmit}>
-          <label>
-            <p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>
-            Enter a URL to be scraped:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-          {this.state.loading ? <LoadingSign loading={true} /> : <LoadingSign loading={false} />}
-        </form>
-        {this.state.imageData ? <img alt="Website Screenshot" src={`../${this.state.imageData}`}></img> : <div></div>}
-        <HTMLRender url={this.state.finalURL} html={this.state.html} />
+        <div className="front-header dark">
+          <h1>Web Scraper!</h1>
+          <form className="search-form" onSubmit={this.handleSubmit}>
+            <label>
+              <p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>
+              <input id="submit-input" type="text" value={this.state.value} onChange={this.handleChange} />
+              <button id="submit-button" type="submit">Submit</button>
+            </label>
+            {this.state.loading ? <LoadingSign loading={true} /> : <LoadingSign loading={false} />}
+          </form>
+        </div>
+        <div className="light" id="front-body">
+          {this.state.imageData ? <img alt="Website Screenshot" src={`../${this.state.imageData}`}></img> : <div></div>}
+          <HTMLRender url={this.state.finalURL} html={this.state.html} />
+        </div>
       </div>
 
     );

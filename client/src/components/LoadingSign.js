@@ -11,7 +11,8 @@ class LoadingSign extends React.Component {
         anime({
             targets: '.loading-rect',
             translateY: -10,
-            delay: anime.stagger(100), // increase delay by 100ms for each element,
+            delay: anime.stagger(100), // increase delay by 100ms for each element
+            backgroundColor: '#303F5E',
             loop: true
         }).play();
     }

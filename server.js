@@ -67,7 +67,8 @@ app.post('/html', (req, res) => {
       let strippedHTML = html.replace(/<\/script>/g, '-->')
       .replace(/<script /g, '<!--')
       .replace(/<img.*?src="(.*?)"[^\>]+>/g, '<img style="width: 225px; height: 200px" src="https://wbd-web-scraper.s3.amazonaws.com/Serana.jpg">')
-      .replace(/href="(.*?)"/g, '');
+      .replace(/href="(.*?)"/g, '')
+      .replace(/background-image: url\((.*?)\)/g, '');
       if (strippedHTML.includes('<script>')) {
         strippedHTML = strippedHTML.replace(/<script>/g, '<!--');
       }
