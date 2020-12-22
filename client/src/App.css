@@ -43,7 +43,9 @@
 }
 
 .loading-rect {
-  position: absolute;
+  display: inline-block;
+  margin-left: 3px;
+  margin-right: 3px;
   background-color: black;
   width: 10px;
   height: 10px;

@@ -10,7 +10,7 @@ class LoadingSign extends React.Component {
         //begin loading animation
         anime({
             targets: '.loading-rect',
-            translateX: 250,
+            translateY: -10,
             delay: anime.stagger(100), // increase delay by 100ms for each element,
             loop: true
         }).play();
