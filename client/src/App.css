@@ -133,15 +133,33 @@ button:focus {
   margin: 0 auto;
   margin-top: 2vh;
   padding: 5px 10px 5px 10px;
-  background-color: #9AB3C5;
+  background-color: rgb(55, 71, 104);
   border-radius: 3px;
-  color: #282c34;
+  color: #F8F7F6;
 }
 
 .footer {
   position: fixed;
   z-index: 999;
   width: 100vw;
+  height: fit-content;
   bottom: 0;
-  height: fit-content
+  display: flex;
+  align-items: center;
+}
+
+#footer-message {
+  margin: 0 auto;
+  padding: 0px 0px 0px 5px;
+}
+
+#footer-close {
+  padding: 5px;
+  background-color: rgb(55, 71, 104);
+}
+
+#footer-close:hover {
+  cursor: pointer;
+  background-color: #F8F7F6;
+  color: rgb(55, 71, 104);
 }
