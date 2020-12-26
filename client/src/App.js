@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import HTMLRender from './components/HTMLRender';
 import LoadingSign from './components/LoadingSign';
+import Footer from './components/Footer';
 
 class App extends React.Component {
 
@@ -85,9 +86,11 @@ class App extends React.Component {
           <h1>Web Scraper!</h1>
           <form className="search-form" onSubmit={this.handleSubmit}>
             <label>
-              <p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>
-              <input id="submit-input" type="text" value={this.state.value} onChange={this.handleChange} />
-              <button id="submit-button" type="submit">Submit</button>
+              <div id="search-bar">
+                <p>Enter a a URL below</p>
+                <input id="submit-input" type="text" value={this.state.value} onChange={this.handleChange} />
+                <button id="submit-button" type="submit">Submit</button>
+              </div>
             </label>
             {this.state.loading ? <LoadingSign loading={true} /> : <LoadingSign loading={false} />}
           </form>
@@ -96,6 +99,7 @@ class App extends React.Component {
           {this.state.imageData ? <img alt="Website Screenshot" src={`../${this.state.imageData}`}></img> : <div></div>}
           <HTMLRender url={this.state.finalURL} html={this.state.html} />
         </div>
+        <Footer message="<p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>" />
       </div>
 
     );
