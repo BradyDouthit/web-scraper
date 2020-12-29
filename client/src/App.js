@@ -67,7 +67,8 @@ class App extends React.Component {
       targets: '.footer',
       translateX: '-100vw',
       duration: 750,
-      easing: 'easeInElastic'
+      easing: 'easeOutElastic',
+      delay: 150
     }).play();
   }
 
