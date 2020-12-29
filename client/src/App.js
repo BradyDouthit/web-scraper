@@ -5,6 +5,7 @@ import HTMLRender from './components/HTMLRender';
 import LoadingSign from './components/LoadingSign';
 import Footer from './components/Footer';
 import anime from 'animejs';
+import StartAnimation from './components/StartAnimation';
 
 class App extends React.Component {
 
@@ -15,11 +16,18 @@ class App extends React.Component {
       imageData: '',
       html: '',
       finalURL: '',
-      loading: false
+      loading: false,
+      startAnimationFinished: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (!this.state.startAnimationFinished) {
+
+    }
   }
 
   getHTML = () => {
@@ -93,7 +101,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div id="front-header" className="dark">
+        <div id="laptop-bg-outer">
+          <div id="laptop-bg-inner">
+            <div id="laptop-browser">
+              <StartAnimation />
+            </div>
+          </div>
+        </div>
+        {/* <div id="front-header" className="dark">
           <h1>Web Scraper!</h1>
           <form className="search-form" onSubmit={this.handleSubmit}>
             <label>
@@ -110,7 +125,7 @@ class App extends React.Component {
           {this.state.imageData ? <img alt="Website Screenshot" src={`../${this.state.imageData}`}></img> : <div></div>}
           <HTMLRender url={this.state.finalURL} html={this.state.html} />
         </div>
-        <Footer closeFooter={() => this.closeFooter} message="<p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>" />
+        <Footer closeFooter={() => this.closeFooter} message="<p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>" /> */}
       </div>
 
     );
