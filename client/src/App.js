@@ -4,6 +4,7 @@ import './App.css';
 import HTMLRender from './components/HTMLRender';
 import LoadingSign from './components/LoadingSign';
 import Footer from './components/Footer';
+import anime from 'animejs';
 
 class App extends React.Component {
 
@@ -61,6 +62,15 @@ class App extends React.Component {
       });
   }
 
+  closeFooter = () => {
+    anime({
+      targets: '.footer',
+      translateX: '-100vw',
+      duration: 750,
+      easing: 'easeInElastic'
+    }).play();
+  }
+
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
@@ -82,7 +92,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div className="front-header dark">
+        <div id="front-header" className="dark">
           <h1>Web Scraper!</h1>
           <form className="search-form" onSubmit={this.handleSubmit}>
             <label>
@@ -99,7 +109,7 @@ class App extends React.Component {
           {this.state.imageData ? <img alt="Website Screenshot" src={`../${this.state.imageData}`}></img> : <div></div>}
           <HTMLRender url={this.state.finalURL} html={this.state.html} />
         </div>
-        <Footer message="<p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>" />
+        <Footer closeFooter={() => this.closeFooter} message="<p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>" />
       </div>
 
     );

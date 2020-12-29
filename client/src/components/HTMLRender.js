@@ -1,9 +1,10 @@
 import React from 'react';
 
-function HTMLRender (props) {
+function HTMLRender(props) {
     return (
-        <div id="third-party-div">
-            {props.url ? <p>The site you queried: <a href={props.url}>{props.url}</a></p> : <div></div>}
+
+        <div id="iframe-container">
+            {/* {props.url ? <p>The site you queried: <a href={props.url}>{props.url}</a></p> : <div></div>} */}
             <iframe
                 id="third-party-html"
                 name="third-party-html"
