@@ -25,9 +25,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.state.startAnimationFinished) {
 
-    }
+  }
+
+  setAnimState = (state) => {
+    this.setState({ startAnimationFinished: state })
+    console.log(this.state.startAnimationFinished)
   }
 
   getHTML = () => {
@@ -104,7 +107,8 @@ class App extends React.Component {
         <div id="laptop-bg-outer">
           <div id="laptop-bg-inner">
             <div id="laptop-browser">
-              <StartAnimation />
+              {this.state.startAnimationFinished ? <div id="browser-header"></div> : null}
+              <StartAnimation setAnimState={this.setAnimState} />
             </div>
           </div>
         </div>
