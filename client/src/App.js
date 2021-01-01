@@ -6,6 +6,7 @@ import LoadingSign from './components/LoadingSign';
 import Footer from './components/Footer';
 import anime from 'animejs';
 import StartAnimation from './components/StartAnimation';
+import BrowserContent from './components/BrowserContent';
 
 class App extends React.Component {
 
@@ -28,9 +29,9 @@ class App extends React.Component {
 
   }
 
+  //called by the StartAnimation component, allows for rendering of the
   setAnimState = (state) => {
-    this.setState({ startAnimationFinished: state })
-    console.log(this.state.startAnimationFinished)
+    this.setState({ startAnimationFinished: state });
   }
 
   getHTML = () => {
@@ -107,8 +108,7 @@ class App extends React.Component {
         <div id="laptop-bg-outer">
           <div id="laptop-bg-inner">
             <div id="laptop-browser">
-              {this.state.startAnimationFinished ? <div id="browser-header"></div> : null}
-              <StartAnimation setAnimState={this.setAnimState} />
+              {this.state.startAnimationFinished ? <BrowserContent /> : <StartAnimation setAnimState={this.setAnimState} />}
             </div>
           </div>
         </div>
