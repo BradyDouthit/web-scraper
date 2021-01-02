@@ -6,7 +6,6 @@ import LoadingSign from './components/LoadingSign';
 import Footer from './components/Footer';
 import anime from 'animejs';
 import StartAnimation from './components/StartAnimation';
-import BrowserContent from './components/BrowserContent';
 
 class App extends React.Component {
 
@@ -108,7 +107,28 @@ class App extends React.Component {
         <div id="laptop-bg-outer">
           <div id="laptop-bg-inner">
             <div id="laptop-browser">
-              {this.state.startAnimationFinished ? <BrowserContent /> : <StartAnimation setAnimState={this.setAnimState} />}
+              {this.state.startAnimationFinished ?
+                //TODO: get the form inside of the BrowserContent component
+                <div id="browser-content-container">
+                  <div id="browser-header">
+                    <div className="browser-options" id="browser-close"></div>
+                    <div className="browser-options" id=""></div>
+                    <div className="browser-options" id=""></div>
+                  </div>
+                  <form className="search-form" onSubmit={this.handleSubmit}>
+                    <label>
+                      <div id="search-bar">
+                        <p>Enter a a URL below</p>
+                        <input id="submit-input" type="text" value={this.state.value} onChange={this.handleChange} />
+                        <button id="submit-button" type="submit">Submit</button>
+                      </div>
+                    </label>
+                    {this.state.loading ? <LoadingSign loading={true} /> : <LoadingSign loading={false} />}
+                  </form>
+                  {this.state.imageData ? <img alt="Website Screenshot" src={`../${this.state.imageData}`}></img> : null}
+                  <HTMLRender url={this.state.finalURL} html={this.state.html} />
+                </div> :
+                <StartAnimation setAnimState={this.setAnimState} />}
             </div>
           </div>
         </div>
@@ -130,6 +150,8 @@ class App extends React.Component {
           <HTMLRender url={this.state.finalURL} html={this.state.html} />
         </div>
         <Footer closeFooter={() => this.closeFooter} message="<p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>" /> */}
+        {this.state.startAnimationFinished ? <Footer closeFooter={() => this.closeFooter} message="<p><strong>NOTE:</strong> For security reasons, images and scripts have been stripped from all pages, so things may look funky/unfinished. Links have been disabled.</p>" />
+          : null}
       </div>
 
     );
